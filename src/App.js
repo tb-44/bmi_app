@@ -26,6 +26,18 @@ function App() {
     setState(nVal);
   };
 
+  const handleDelete = (id) => {
+    storeData("lastState", state);
+    let newState = state.filter((e) => {
+      return e.id !== id;
+    });
+    setState(newState);
+  };
+
+  const handleUndo = () => {
+    setState(getData("lastState"));
+  };
+
   return (
     <div className="container">
       <div className="row center">
