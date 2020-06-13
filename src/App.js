@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { getData, storeData } from "localStorage";
+import { getData, storeData } from "./localStorage";
 import { v4 as uuidv4 } from "uuid";
-import BmiForm from "./components/BmiForm";
-import Info from "./components/Info";
-import Bar from "./components/Bar";
+import BmiForm from "./BmiForm";
+import Info from "./Info";
+import Bar from "./Bar";
 
 function App() {
   const initialState = () => getData("data") || [];
