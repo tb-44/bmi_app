@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { getData, storeData } from "localStorage";
 import { v4 as uuidv4 } from "uuid";
+import BmiForm from "./components/BmiForm";
+import Info from "./components/Info";
+import Bar from "./components/Bar";
 
 function App() {
   const initialState = () => getData("data") || [];
@@ -45,14 +48,37 @@ function App() {
       </div>
       <div className="row">
         <div className="col m12 s12">
+          <BmiForm change={handleChange} />
+          <Bar labelData={data.date} bmiData={data.bmi} />
           <div>
             <div className="row center">
               <h4 className="white-text">7 Day Data</h4>
             </div>
+            <div className="data-container row">
+              {state.length > 0 ? (
+                <>
+                  {state.map((info) => (
+                    <Info
+                      key={info.id}
+                      id={info.id}
+                      weight={info.weight}
+                      height={info.height}
+                      date={info.date}
+                      bmi={info.bmi}
+                      deleteCard={handleDelete}
+                    />
+                  ))}
+                </>
+              ) : (
+                <div className="center white-text">No log found</div>
+              )}
+            </div>
           </div>
           {getData("lastState") !== null ? (
             <div className="center">
-              <button className="calculate-btn">Undo</button>
+              <button className="calculate-btn" onClick={handleUndo}>
+                Undo
+              </button>
             </div>
           ) : (
             ""
